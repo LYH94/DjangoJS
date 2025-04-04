@@ -14,10 +14,14 @@ post
   {% comment %} {% for obj in qs %}
     {{ obj.title }} - {{ obj.body }} <br>
   {% endfor %} {% endcomment %}
-  <div id="spinner-box" class="text-center">
-    <div class="spinner-border" role="status"></div>
+
+  <div id="posts-box">
+    <div id="spinner-box" class="text-center">
+      <div class="spinner-border" role="status"></div>
+    </div>
   </div>
-  <div id="posts-box"></div>
-  <div id="hello-world"></div>
+  <div id="end-box" class="text-center mb-3">
+    <div id="load-btn" class="btn btn-primary">Load more</div>
+  </div>
 {% endblock content %}
 
