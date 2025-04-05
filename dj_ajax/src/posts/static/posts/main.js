@@ -128,6 +128,8 @@ loadBtn.addEventListener('click', () => {
   getData();
 });
 
+let newPostId = null;
+
 postForm.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -139,11 +141,9 @@ postForm.addEventListener('submit', e => {
       'title': title.value,
       'body': body.value,
     },
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest',
-    },
     success: function (response){
       console.log(response);
+      newPostId = response.id;
       postsBox.insertAdjacentHTML('afterbegin', `
         <div class="card mb-2">
           <div class="card-body">
@@ -153,7 +153,7 @@ postForm.addEventListener('submit', e => {
           <div class="card-footer">
             <div class="row">
               <div class="col-1">
-                <a href="#" class="btn btn-primary">Details</a>
+                <a href="${url}${response.id}" class="btn btn-primary">Details</a>
               </div>
               <div class="col-1">
                 <form class="like-unlike-forms" data-form-id="${response.id}">
@@ -186,5 +186,19 @@ closeBtn.forEach(btn => btn.addEventListener('click', () => {
     dropzone.classList.add('d-none');
   }
 }))
+
+Dropzone.autoDiscover = false;
+const myDropzone = new Dropzone("#my-dropzone", {
+  url: "/upload/",
+  init: function() {
+    this.on("sending", function(file, xhr, formData) {
+      formData.append("csrfmiddlewaretoken", csrftoken);
+      formData.append("new_post_id", newPostId);
+    });
+  },
+  maxFiles: 5,
+  maxFilesize: 4,
+  acceptedFiles: ".png,.jpg,.jpeg",
+});
 
 getData();

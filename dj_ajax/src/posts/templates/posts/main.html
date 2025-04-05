@@ -30,7 +30,7 @@ post
               <button type="submit" id="add-btn" class="btn btn-success">+ add</button>
             </div>
           </form>
-          <form action="/upload" id="my-dropzone" class="dropzone dz d-none">
+          <form action="upload/" id="my-dropzone" class="dropzone dz d-none">
             {% csrf_token %}
             <div class="fallback">
               <input name="file" type="file" multiple />
