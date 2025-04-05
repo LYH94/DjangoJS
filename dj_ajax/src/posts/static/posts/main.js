@@ -1,9 +1,15 @@
-console.log("hello world");
-
 const postsBox = document.getElementById("posts-box");
 const spinnerBox = document.getElementById("spinner-box");
 const loadBtn = document.getElementById("load-btn");
 const endBox = document.getElementById("end-box");
+
+const postForm = document.getElementById("post-form");
+const title = document.getElementById("id_title");
+const body = document.getElementById("id_body");
+const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+const alertBox = document.getElementById('alert-box');
+console.log('csrf', csrf[0].value);
 
 const getCookie = (name) => {
   let cookieValue = null;
@@ -110,5 +116,52 @@ loadBtn.addEventListener('click', () => {
   visible += 3;
   getData();
 });
+
+postForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  $.ajax({
+    type: 'POST',
+    url: '',
+    data: {
+      'csrfmiddlewaretoken': csrf[0].value,
+      'title': title.value,
+      'body': body.value,
+    },
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    success: function (response){
+      console.log(response);
+      postsBox.insertAdjacentHTML('afterbegin', `
+        <div class="card mb-2">
+          <div class="card-body">
+            <h5 class="card-title">${response.title}</h5>
+            <p class="card-text">${response.body}</p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-1">
+                <a href="#" class="btn btn-primary">Details</a>
+              </div>
+              <div class="col-1">
+                <form class="like-unlike-forms" data-form-id="${response.id}">
+                  <button href="#" class="btn btn-primary text-nowrap" id="like-unlike-${response.id}">Like (0)</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        `)
+        likeUnlikePosts();
+        $('#addPostModal').modal('hide');
+        handleAlerts('success', 'New post added!');
+    },
+    error: function (error) {
+      console.log(error);
+      handleAlerts('danger', 'ups...something went wrong!');
+    }
+  })
+})
 
 getData();

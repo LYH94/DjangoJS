@@ -27,7 +27,7 @@ post
             {{ form|crispy }}
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-              <button type="button" class="btn btn-success">+ add</button>
+              <button type="submit" class="btn btn-success">+ add</button>
             </div>
           </form>
         </div>
@@ -35,6 +35,7 @@ post
     </div>
   </div>
 
+  <div id="alert-box"></div>
   <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addPostModal">
     add post
   </button>
