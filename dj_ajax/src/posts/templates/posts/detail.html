@@ -80,7 +80,7 @@
     <div class="mt-2 mb-2">No photos to show</div>
   {% endif %}
 
-  <div id="back-btn" class="btn btn-info">back</div>
+  <a href="{% url 'posts:main-board' %}" id="back-btn" class="btn btn-info">back</a>
   <div id="update-btn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#updateModal">update</div>
   <div id="delete-btn" class="btn btn-danger d-none" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</div>
   <div id="spinner-box" class="text-center">

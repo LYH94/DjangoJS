@@ -185,6 +185,9 @@ closeBtn.forEach(btn => btn.addEventListener('click', () => {
   if (!dropzone.classList.contains('d-none')) {
     dropzone.classList.add('d-none');
   }
+
+  const myDropzone = Dropzone.forElement("#my-dropzone");
+  myDropzone.removeAllFiles(true);
 }))
 
 Dropzone.autoDiscover = false;
