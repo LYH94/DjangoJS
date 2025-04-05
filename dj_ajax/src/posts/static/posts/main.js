@@ -11,7 +11,10 @@ const csrf = document.getElementsByName('csrfmiddlewaretoken')
 const url = window.location.href;
 
 const alertBox = document.getElementById('alert-box');
-console.log('csrf', csrf[0].value);
+
+const dropzone = document.getElementById('my-dropzone');
+const addBtn = document.getElementById('add-btn');
+const closeBtn = [...document.getElementsByClassName('add-modal-close')];
 
 const getCookie = (name) => {
   let cookieValue = null;
@@ -162,9 +165,9 @@ postForm.addEventListener('submit', e => {
         </div>
         `)
         likeUnlikePosts();
-        $('#addPostModal').modal('hide');
+        // $('#addPostModal').modal('hide');
         handleAlerts('success', 'New post added!');
-        postForm.reset();
+        // postForm.reset();
     },
     error: function (error) {
       console.log(error);
@@ -172,5 +175,16 @@ postForm.addEventListener('submit', e => {
     }
   })
 })
+
+addBtn.addEventListener('click', () => {
+  dropzone.classList.remove('d-none');
+})
+
+closeBtn.forEach(btn => btn.addEventListener('click', () => {
+  postForm.reset();
+  if (!dropzone.classList.contains('d-none')) {
+    dropzone.classList.add('d-none');
+  }
+}))
 
 getData();
