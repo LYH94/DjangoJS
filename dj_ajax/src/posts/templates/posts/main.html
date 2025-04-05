@@ -20,11 +20,14 @@ post
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
+          <form action="" id="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
           <button type="button" class="btn btn-success">+ add</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
