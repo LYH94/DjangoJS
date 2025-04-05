@@ -17,7 +17,7 @@ def post_list_and_create(request):
         instance.author = author
         instance.save()
         return JsonResponse({
-          'id': instance.id,          'title': instance.title,
+          'title': instance.title,
           'body': instance.body,
           'author': instance.author.user.username,
           'id': instance.id,
@@ -64,11 +64,11 @@ def load_post_data_view(request, num_posts):
 def post_detail_data_view(request, pk):
     obj = Post.objects.get(pk=pk)
     data = {
-        'id': obj.id,
-        'title': obj.title,
-        'body': obj.body,
-        'author': obj.author.user.username,
-        'logged_in': request.user.username,
+      'id': obj.id,
+      'title': obj.title,
+      'body': obj.body,
+      'author': obj.author.user.username,
+      'logged_in': request.user.username,
     }
     return JsonResponse({'data': data})
     
@@ -86,20 +86,19 @@ def like_unlike_post(request):
 
 def update_post(request, pk):
   obj = Post.objects.get(pk=pk)
-  if request.is_ajax():
+  if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
     new_title = request.POST.get('title')
     new_body = request.POST.get('body')
     obj.title = new_title
     obj.body = new_body
     obj.save()
-  return JsonResponse({
-    'title': obj.title,
-    'body': obj.body,
+    return JsonResponse({
+      'title': obj.title,
+      'body': obj.body,
+    })
 
-  })
-
-def delete_post(request):
+def delete_post(request, pk):
   obj = Post.objects.get(pk=pk)
-  if request.is_ajax():
+  if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
     obj.delete()
-  return JsonResponse({})
+    return JsonResponse({})
