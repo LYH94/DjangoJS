@@ -72,7 +72,7 @@ const getData = () => {
       console.log(response);
       const data = response.data;
       setTimeout(() => {
-        spinnerBox.classList.add('not-visible');
+        spinnerBox.classList.add('d-none');
         console.log(data);
         data.forEach(el => {
           postsBox.innerHTML += `
@@ -103,7 +103,7 @@ const getData = () => {
         endBox.textContent = "No posts added yet...";
       }
       else if (response.size <= visible) {
-        loadBtn.classList.add('not-visible');
+        loadBtn.classList.add('d-none');
         endBox.textContent = "No more posts to load...";
       }
     },
@@ -114,7 +114,7 @@ const getData = () => {
 }
 
 loadBtn.addEventListener('click', () => {
-  spinnerBox.classList.remove('not-visible');
+  spinnerBox.classList.remove('d-none');
   visible += 3;
   getData();
 });
