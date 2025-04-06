@@ -45,13 +45,13 @@
         </div>
         <div class="modal-body">
           Are you sure you want to delete <b>"{{obj.title}}"</b>?
-          <form action="" id="delete-form">
-            {% csrf_token %}
-            <div class="modal-footer">
+          <div class="modal-footer">
+            <form action="" id="delete-form">
+              {% csrf_token %}
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
               <button type="submit" class="btn btn-success">delete</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
