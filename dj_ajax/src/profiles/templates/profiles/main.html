@@ -15,11 +15,11 @@ my profile
   <h3>{{obj.user}}</h3>
   <hr>
   <div id="avatar-box" class="text-center">
-    <img src="{{obj.avatar.url}}" class="rounded" height="200px" width="auto" alt="{{obj.user.username}}'s avatar">
+    <img src="{{obj.avatar.url}}" class="rounded" height="200px" width="auto" alt="{{obj.user.username}}">
   </div>
-  <div id="profile-form">
+  <form id="profile-form" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-primary mt-3">Save</button>
-  </div>
+  </form>
 {% endblock content %}
