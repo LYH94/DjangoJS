@@ -62,6 +62,7 @@ def load_post_data_view(request, num_posts):
         'liked': True if request.user in obj.liked.all() else False,
         'count': obj.like_count,
         'author': obj.author.user.username,
+        'avatar': obj.author.avatar.url,
       }
       data.append(item)
     return JsonResponse({'data':data[lower:upper], 'size': size})

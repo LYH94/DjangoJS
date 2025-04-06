@@ -87,4 +87,9 @@
     <div class="spinner-border" role="status"></div>
   </div>
   <div id="post-box" class="mt-1"></div>
+
+  <div class="user-profile mt-2">
+    <img src="{{ obj.author.avatar.url }}" alt="{{ obj.author.user.username }}" class="rounded-circle" width="50" height="50">
+    <div class="d-inline-block">{{ obj.author.user.username }}</div>
+  </div>
 {% endblock content %}
