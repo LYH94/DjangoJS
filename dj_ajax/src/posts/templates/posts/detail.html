@@ -59,37 +59,42 @@
 
   <!-- carousel -->
   {% if obj.get_photos %}
-  <div id="carouselExample" class="carousel slide mb-2" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      {% for p in obj.get_photos %}
-        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-          <img src="{{p.image.url}}" class="d-block w-100" alt="photo{{obj.pk}}">
-        </div>
-      {% endfor %}
+  <div class="mb-3">
+    <div id="carouselExample" class="carousel slide mb-2" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for p in obj.get_photos %}
+          <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+            <img src="{{p.image.url}}" class="d-block w-100" alt="photo{{obj.pk}}">
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
   {% else %}
     <div class="mt-2 mb-2">No photos to show</div>
   {% endif %}
 
-  <a href="{% url 'posts:main-board' %}" id="back-btn" class="btn btn-info">back</a>
-  <div id="update-btn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#updateModal">update</div>
-  <div id="delete-btn" class="btn btn-danger d-none" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</div>
+  <a href="{% url 'posts:main-board' %}" id="back-btn" class="btn btn-info rounded-pill me-2">back</a>
+  <div id="update-btn" class="btn btn-primary d-none rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#updateModal">update</div>
+  <div id="delete-btn" class="btn btn-danger d-none rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</div>
   <div id="spinner-box" class="text-center">
     <div class="spinner-border" role="status"></div>
   </div>
-  <div id="post-box" class="mt-1"></div>
 
-  <div class="user-profile mt-2">
-    <img src="{{ obj.author.avatar.url }}" alt="{{ obj.author.user.username }}" class="rounded-circle" width="50" height="50">
-    <div class="d-inline-block">{{ obj.author.user.username }}</div>
+  <div class="card shadow-sm border-0 p-4 mt-3 rounded">
+    <div id="post-box" class="mt-1"></div>
+    <hr>
+    <div class="user-profile mt-2">
+      <img src="{{ obj.author.avatar.url }}" alt="{{ obj.author.user.username }}" class="rounded-circle" width="50" height="50">
+      <div class="d-inline-block">{{ obj.author.user.username }}</div>
+    </div>
   </div>
 {% endblock content %}
