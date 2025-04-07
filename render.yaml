@@ -1,20 +1,20 @@
 databases:
-  - name: mysitedb
+  - name: DjangoPostdb
     plan: free
-    databaseName: mysite
-    user: mysite
+    databaseName: DjangoPost
+    user: DjangoPost
 
 services:
   - type: web
     plan: free
-    name: mysite
+    name: DjangoPost
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "cd dj_ajax/src && python -m gunicorn posts_proj.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysitedb
+          name: DjangoPostdb
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
