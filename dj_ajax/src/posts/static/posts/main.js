@@ -85,19 +85,19 @@ const getData = () => {
         console.log(data);
         data.forEach(el => {
           postsBox.innerHTML += `
-            <div class="card mb-2">
+            <div class="card shadow border-0 card-hover-effect mb-3">
               <div class="card-body">
                 <h5 class="card-title">${el.title}</h5>
                 <p class="card-text">${el.body}</p>
               </div>
-              <div class="card-footer">
+              <div class="card-footer bg-white border-top border-light">
                 <div class="row">
                   <div class="col-1">
-                    <a href="${url}${el.id}" class="btn btn-primary">Details</a>
+                    <a href="${url}${el.id}" class="btn bg-primary-green text-white btn-rounded text-nowrap">Details</a>
                   </div>
                   <div class="col-1">
                     <form class="like-unlike-forms" data-form-id="${el.id}">
-                      <button href="#" class="btn btn-primary text-nowrap" id="like-unlike-${el.id}">${el.liked ? `Unlike (${el.count})`: `Like (${el.count})`}</button>
+                      <button href="#" class="btn btn-primary btn-rounded text-nowrap" id="like-unlike-${el.id}">${el.liked ? `Unlike (${el.count})`: `Like (${el.count})`}</button>
                     </form>
                   </div>
                 </div>
@@ -145,25 +145,25 @@ postForm.addEventListener('submit', e => {
       console.log(response);
       newPostId = response.id;
       postsBox.insertAdjacentHTML('afterbegin', `
-        <div class="card mb-2">
+        <div class="card shadow border-0 card-hover-effect mb-3 highlight-new">
           <div class="card-body">
             <h5 class="card-title">${response.title}</h5>
             <p class="card-text">${response.body}</p>
           </div>
-          <div class="card-footer">
+          <div class="card-footer bg-white border-top border-light">
             <div class="row">
               <div class="col-1">
-                <a href="${url}${response.id}" class="btn btn-primary">Details</a>
+                <a href="${url}${response.id}" class="btn bg-primary-green text-white btn-rounded">Details</a>
               </div>
               <div class="col-1">
                 <form class="like-unlike-forms" data-form-id="${response.id}">
-                  <button href="#" class="btn btn-primary text-nowrap" id="like-unlike-${response.id}">Like (0)</button>
+                  <button href="#" class="btn bg-primary-yellow text-dark-gray btn-rounded text-nowrap" id="like-unlike-${response.id}">Like (0)</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        `)
+      `);
         likeUnlikePosts();
         // $('#addPostModal').modal('hide');
         handleAlerts('success', 'New post added!');

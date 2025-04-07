@@ -1,3 +1,24 @@
+:root {
+  --primary-green: #3bc295;
+  --primary-yellow: #ffd369;
+}
+
+.bg-primary-green { 
+  background-color: var(--primary-green) 
+}
+
+.bg-primary-yellow { 
+  background-color: var(--primary-yellow)
+}
+
+.btn-rounded {
+  border-radius: 3rem !important;
+}
+
+.card-rounded {
+  border-radius: .75rem !important;
+}
+
 .dz {
   border: dashed !important;
   border-color: #ccc !important;

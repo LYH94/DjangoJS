@@ -26,8 +26,8 @@
             {% csrf_token %}
             {{ form|crispy }}
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-              <button type="submit" class="btn btn-success">update</button>
+              <button type="button" class="btn btn-danger btn-rounded" data-bs-dismiss="modal">close</button>
+              <button type="submit" class="btn btn-success btn-rounded">update</button>
             </div>
           </form>
         </div>
@@ -44,12 +44,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete <b>"{{obj.title}}"</b>?
+          <p>
+            Are you sure you want to delete <b>"{{obj.title}}"</b>?
+          </p>
           <div class="modal-footer">
             <form action="" id="delete-form">
               {% csrf_token %}
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-              <button type="submit" class="btn btn-success">delete</button>
+              <button type="button" class="btn btn-danger btn-rounded me-2" data-bs-dismiss="modal">close</button>
+              <button type="submit" class="btn btn-success btn-rounded">delete</button>
             </form>
           </div>
         </div>
@@ -82,14 +84,14 @@
     <div class="mt-2 mb-2">No photos to show</div>
   {% endif %}
 
-  <a href="{% url 'posts:main-board' %}" id="back-btn" class="btn btn-info rounded-pill me-2">back</a>
+  <a href="{% url 'posts:main-board' %}" id="back-btn" class="btn btn-secondary rounded-pill me-2">back</a>
   <div id="update-btn" class="btn btn-primary d-none rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#updateModal">update</div>
   <div id="delete-btn" class="btn btn-danger d-none rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</div>
   <div id="spinner-box" class="text-center">
     <div class="spinner-border" role="status"></div>
   </div>
 
-  <div class="card shadow-sm border-0 p-4 mt-3 rounded">
+  <div class="card shadow-sm border-0 p-4 mt-3 rounded card-rounded">
     <div id="post-box" class="mt-1"></div>
     <hr>
     <div class="user-profile mt-2">
