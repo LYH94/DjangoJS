@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, Photo
+from .models import Post, Photo, Comment
 from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
 from profiles.models import Profile
@@ -129,3 +129,53 @@ def image_upload_view(request):
     post = Post.objects.get(pk=new_post_id)
     Photo.objects.create(image=img, post=post)
   return HttpResponse()
+
+@login_required
+def add_comment(request, pk):
+  if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    post = Post.objects.get(pk=pk)
+    body = request.POST.get('body')
+    
+    if body:
+      author = Profile.objects.get(user=request.user)
+      comment = Comment.objects.create(
+        post=post,
+        author=author,
+        body=body
+      )
+      
+      return JsonResponse({
+        'id': comment.id,
+        'body': comment.body,
+        'author': comment.author.user.username,
+        'avatar': comment.author.avatar.url,
+        'created': comment.created.strftime('%Y-%m-%d %H:%M')
+      })
+    else:
+      return JsonResponse({'error': 'Comment body cannot be empty'}, status=400)
+  return redirect('posts:main-board')
+
+@login_required
+def load_comments(request, pk):
+  print(f"Loading comments for post {pk}")
+  if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    post = Post.objects.get(pk=pk)
+    comments = Comment.objects.filter(post=post)
+    
+    data = []
+    for comment in comments:
+      item = {
+        'id': comment.id,
+        'body': comment.body,
+        'author': comment.author.user.username,
+        'avatar': comment.author.avatar.url,
+        'created': comment.created.strftime('%Y-%m-%d %H:%M')
+      }
+      data.append(item)
+
+    print(f"Post: {post.title}, Comments count: {comments.count()}")
+    for comment in comments:
+      print(f"Comment ID: {comment.id}, Author: {comment.author.user.username}")
+    
+    return JsonResponse({'comments': data})
+  return redirect('posts:main-board')
