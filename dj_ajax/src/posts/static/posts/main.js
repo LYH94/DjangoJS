@@ -58,11 +58,9 @@ const likeUnlikePosts = ()=> {
         'X-Requested-With': 'XMLHttpRequest',
       },
       success: function (response){
-        console.log(response);
         clickedBtn.textContent = response.liked ? `Unlike (${response.count})` : `Like (${response.count})`;
       },
       error: function (error) {
-        console.log('error', error);
       }
     });
   }));
@@ -78,11 +76,9 @@ const getData = () => {
       'X-Requested-With': 'XMLHttpRequest',
     },
     success: function (response) {
-      console.log(response);
       const data = response.data;
       setTimeout(() => {
         spinnerBox.classList.add('d-none');
-        console.log(data);
         data.forEach(el => {
           postsBox.innerHTML += `
             <div class="card shadow border-0 card-hover-effect mb-3">
@@ -107,7 +103,6 @@ const getData = () => {
         });
         likeUnlikePosts();
       }, 100);
-      console.log(response.size);
       if(response.size === 0) {
         endBox.textContent = "No posts added yet...";
       }
@@ -117,7 +112,6 @@ const getData = () => {
       }
     },
     error: function (error) {
-      console.log('error', error);
     }
   })
 }
@@ -142,7 +136,6 @@ postForm.addEventListener('submit', e => {
       'body': body.value,
     },
     success: function (response){
-      console.log(response);
       newPostId = response.id;
       postsBox.insertAdjacentHTML('afterbegin', `
         <div class="card shadow border-0 card-hover-effect mb-3 highlight-new">
@@ -170,7 +163,6 @@ postForm.addEventListener('submit', e => {
         // postForm.reset();
     },
     error: function (error) {
-      console.log(error);
       handleAlerts('danger', 'ups...something went wrong!');
     }
   })

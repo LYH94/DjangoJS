@@ -30,13 +30,10 @@ $.ajax({
   type: 'GET',
   url: url,
   success: function (response) {
-    console.log(response);
     const data = response.data;
 
     if (data.logged_in !== data.author) {
-      console.log('different')
     } else {
-      console.log('same')
       updateBtn.classList.remove('d-none');
       deleteBtn.classList.remove('d-none');
     }
@@ -100,7 +97,6 @@ $.ajax({
     commentsBox.innerHTML = commentsHtml;
   },
   error: function(error) {
-    console.log(error);
     commentsSpinner.classList.add('d-none');
     commentsBox.innerHTML = '<p class="text-center text-danger">Error loading comments</p>';
   }
@@ -121,7 +117,6 @@ updateForm.addEventListener('submit', (e) => {
       'body': body.value,
     },
     success: function (response) {
-      console.log(response);
       handleAlerts('success', 'Post has been updated!');
       title.textContent = response.title;
       body.textContent = response.body;
@@ -198,7 +193,6 @@ commentForm.addEventListener('submit', e => {
       handleAlerts('success', 'Comment posted successfully!');
     },
     error: function(error) {
-      console.log(error);
       handleAlerts('danger', 'Failed to post comment');
     }
   });
