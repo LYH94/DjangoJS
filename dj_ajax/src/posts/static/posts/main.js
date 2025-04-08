@@ -88,10 +88,10 @@ const getData = () => {
               </div>
               <div class="card-footer bg-white border-top border-light">
                 <div class="row">
-                  <div class="col-1">
+                  <div class="col-6 col-md-3 col-lg-1">
                     <a href="${url}${el.id}" class="btn bg-primary-green text-white btn-rounded text-nowrap">Details</a>
                   </div>
-                  <div class="col-1">
+                  <div class="col-6 col-md-3 col-lg-1">
                     <form class="like-unlike-forms" data-form-id="${el.id}">
                       <button href="#" class="btn bg-primary-yellow text-dark-gray btn-rounded text-nowrap" id="like-unlike-${el.id}">${el.liked ? `Unlike (${el.count})`: `Like (${el.count})`}</button>
                     </form>
@@ -145,10 +145,10 @@ postForm.addEventListener('submit', e => {
           </div>
           <div class="card-footer bg-white border-top border-light">
             <div class="row">
-              <div class="col-1">
+              <div class="col-6 col-md-3 col-lg-1">
                 <a href="${url}${response.id}" class="btn bg-primary-green text-white btn-rounded">Details</a>
               </div>
-              <div class="col-1">
+              <div class="col-6 col-md-3 col-lg-1">
                 <form class="like-unlike-forms" data-form-id="${response.id}">
                   <button href="#" class="btn bg-primary-yellow text-dark-gray btn-rounded text-nowrap" id="like-unlike-${response.id}">Like (0)</button>
                 </form>
